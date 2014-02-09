@@ -1,0 +1,79 @@
+﻿@model TestFacebook.Models.FacebookUser
+
+@{
+    ViewBag.Title = "FacebookCallback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Facebook info</h2>
+
+<div>
+    <h4>Facebook user</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt class="col-lg-5">
+        </dt>
+        <dd>
+            <img src="@Model.PictureUrl"/>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            Friends count
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FriendsCount)
+        </dd>
+
+        <dt>
+           Male friends
+        </dt>
+
+        <dd>
+            @Model.MaleFriendsInPercentages.ToString("F")%
+        </dd>
+
+        <dt>
+            Female friends
+        </dt>
+
+        <dd>
+            @Model.FemaleFriendsInPercentages.ToString("F")%
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back", "Index", "Home")
+</p>

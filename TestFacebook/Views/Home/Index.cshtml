@@ -1,0 +1,41 @@
+﻿@model IQueryable<TestFacebook.Models.FacebookUser>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    @if (Model.Any())
+{
+   
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Country</td>
+                    <td>City</td>
+                    <td>Friends count</td>
+                    <td>Male friends</td>
+                    <td>Female friends</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td><img src="@user.PictureUrl"/></td>
+                        <td>@user.Name</td>
+                        <td>@user.Age</td>
+                        <td>@user.Country</td>
+                        <td>@user.City</td>
+                        <td>@user.FriendsCount</td>
+                        <td>@user.MaleFriendsInPercentages.ToString("F")%</td>
+                        <td>@user.FemaleFriendsInPercentages.ToString("F")%</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+}
+    <p><a href="@Url.Action("AuthorizeWithFacebook")" class="btn btn-primary btn-large">Authorize with Facebook</a></p>
+</div>
