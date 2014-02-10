@@ -30,7 +30,7 @@
             string accessToken = this.facebookManager.GetToken(code, url);
            
             UserInfo userInfo = await this.facebookManager.GetUserInfo(accessToken);
-            CurrentLocation currentLocation = await this.facebookManager.GetUserLocation(accessToken);
+            CurrentLocation currentLocation = await this.facebookManager.GetUserLocation(accessToken) ?? new CurrentLocation();
             List<Friend> friends = await this.facebookManager.GetUserFriends(accessToken, FriendsLimit, friendsCount);
 
             friendsCount = friends.Count;
@@ -53,8 +53,8 @@
                                        City = currentLocation.City ?? string.Empty,
                                        Country = currentLocation.Country ?? string.Empty,
                                        FriendsCount = friends.Count,
-                                       FemaleFriendsInPercentages = (friends.Count(x => x.Gender == "female") / (float)friends.Count) * 100,
-                                       MaleFriendsInPercentages = (friends.Count(x => x.Gender == "male") / (float)friends.Count) * 100
+                                       FemaleFriendsInPercentages = friends.Count > 0 ? (friends.Count(x => x.Gender == "female") / (float)friends.Count) * 100 : 0,
+                                       MaleFriendsInPercentages = friends.Count > 0 ? (friends.Count(x => x.Gender == "male") / (float)friends.Count) * 100 : 0
                                    };
 
             this.facebookUserRepository.Add(facebookUser);
